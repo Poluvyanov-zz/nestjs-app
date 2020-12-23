@@ -1,0 +1,45 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserEntity {
+  id: Int!
+  email: String!
+  password: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginOutput {
+  accessToken: String!
+  expiresIn: Int!
+  refreshToken: String!
+}
+
+type RegistrationOutput {
+  id: Int!
+  email: String!
+  created_at: DateTime!
+}
+
+type UpdateAccessTokenOutput {
+  accessToken: String!
+  refreshToken: String!
+  expiresIn: String!
+}
+
+type Query {
+  updateAccessToken(refresh_token: String!, old_access_token: String!): UpdateAccessTokenOutput!
+}
+
+type Mutation {
+  login(email: String!, password: String!): LoginOutput!
+  registration(email: String!, password: String!): RegistrationOutput!
+  logout(refresh_token: String!, from_all: Boolean): String!
+}
