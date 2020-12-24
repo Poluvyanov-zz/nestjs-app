@@ -20,7 +20,8 @@ export class AuthResolver {
   constructor(
     private readonly authService: AuthService,
     private readonly tokenService: TokenService,
-  ) {}
+  ) {
+  }
 
   @Mutation(() => LoginOutput)
   async login(@Args() loginInput: LoginInput): Promise<LoginOutput> {
@@ -57,15 +58,10 @@ export class AuthResolver {
     @CurrentUser() user,
     @Args() logoutInput: LogoutInput,
   ): Promise<any> {
-    const { refresh_token, from_all } = logoutInput;
-    if (from_all) {
-      await this.authService.logoutFromAll(user.id);
-    } else {
-      if (!refresh_token) {
-        throw new Error('No refresh token provided');
-      }
-      await this.authService.logout(user, refresh_token);
+    const { refresh_token } = logoutInput;
+    if (!refresh_token) {
+      throw new Error('No refresh token provided');
     }
-    return 'ok';
+    return this.authService.logout(user, refresh_token);
   }
 }

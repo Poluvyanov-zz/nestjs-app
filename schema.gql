@@ -41,5 +41,5 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): LoginOutput!
   registration(email: String!, password: String!): RegistrationOutput!
-  logout(refresh_token: String!, from_all: Boolean): String!
+  logout(refresh_token: String!): String!
 }

@@ -89,7 +89,7 @@ export class TokenService {
   async createRefreshToken(tokenContent: { userId: number }): Promise<string> {
     const { userId } = tokenContent;
     const token = new RefreshTokenEntity();
-    const refreshToken = randomBytes(64).toString('hex');
+    const refreshToken = await this.generateRefreshToken();
     token.user_id = userId;
     token.value = refreshToken;
     token.expires_at = moment().add(this.refreshTokenTtl, 'd').toDate();
@@ -150,5 +150,9 @@ export class TokenService {
     return (
       userExpiredArray && expire < moment(userExpiredArray.expired_at).unix()
     );
+  }
+
+  async generateRefreshToken() {
+    return randomBytes(64).toString('hex');
   }
 }

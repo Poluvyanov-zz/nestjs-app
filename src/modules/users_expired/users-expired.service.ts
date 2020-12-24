@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserExpiredEntity } from './models/user_expired.entity';
 import { UserDto } from '../users/dto/user.dto';
-import { UserEntity } from '../users/models/user.entity';
 
 @Injectable()
 export class UsersExpiredService {

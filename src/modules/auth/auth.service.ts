@@ -17,7 +17,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly tokenService: TokenService,
     private readonly userService: UsersService,
-  ) {}
+  ) {
+  }
 
   async validateUser(email: string, password: string): Promise<any> {
     try {
@@ -60,12 +61,13 @@ export class AuthService {
     return this.userService.create(registrationInput);
   }
 
-  async logout(user: UserDto, refreshToken: string): Promise<any> {
-    await this.tokenService.deleteRefreshToken(user, refreshToken);
-  }
-
-  async logoutFromAll(user: UserDto): Promise<any> {
-    await this.tokenService.deleteRefreshTokenForUser(user);
+  async logout(user: UserDto, refreshToken: string): Promise<string> {
+    try {
+      await this.tokenService.deleteRefreshToken(user, refreshToken);
+    } catch (e) {
+      throw new Error(e.message);
+    }
+    return 'ok';
   }
 
 }
