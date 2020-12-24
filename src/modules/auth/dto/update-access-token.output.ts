@@ -1,13 +1,13 @@
-import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UpdateAccessTokenOutput {
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   accessToken: string;
 
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   refreshToken: string;
 
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   expiresIn: number;
 }

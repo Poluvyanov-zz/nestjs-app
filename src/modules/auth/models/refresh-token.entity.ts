@@ -4,15 +4,15 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 @Entity('refresh_token')
 export default class RefreshTokenEntity {
-  @Field((type) => Int)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field((type) => Int)
+  @Field(() => Int)
   @Column()
   user_id: number;
 
-  @Field((type) => String)
+  @Field(() => String)
   @Column()
   value: string;
 

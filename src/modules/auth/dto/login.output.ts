@@ -1,14 +1,13 @@
-import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql';
-import { IsEmail } from 'class-validator';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class LoginOutput {
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   accessToken: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   expiresIn: number;
 
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   refreshToken: string;
 }

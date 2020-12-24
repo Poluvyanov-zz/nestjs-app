@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserEntity } from './models/user.entity';
 import { CreateUserArgs } from './dto/create.user.args';
 
@@ -28,7 +28,6 @@ export class UsersService {
     id: number,
     newValue: CreateUserArgs,
   ): Promise<UserEntity | null> {
-    const user = await this.userRepository.findOneOrFail(id);
     await this.userRepository.update(id, newValue);
     return this.userRepository.findOne(id);
   }

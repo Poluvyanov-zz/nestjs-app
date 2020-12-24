@@ -1,21 +1,19 @@
-import { BeforeInsert, Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { compareSync, hashSync } from 'bcrypt';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Exclude } from 'class-transformer';
-import { UserExpiredEntity } from '../../users_expired/models/user_expired.entity';
 
 @ObjectType()
 @Entity('users')
 export class UserEntity {
-  @Field((type) => Int)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field((type) => String)
+  @Field(() => String)
   @Column({ nullable: false, unique: true })
   email: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   @Column()
   password: string;
 

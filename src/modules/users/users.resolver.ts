@@ -1,7 +1,6 @@
-import { HttpService, Inject, OnModuleInit, UseGuards } from '@nestjs/common';
+import { HttpService } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { UserEntity } from './models/user.entity';
+import { Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class UsersResolver {

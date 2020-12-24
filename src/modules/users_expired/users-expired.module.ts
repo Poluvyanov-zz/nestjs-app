@@ -8,5 +8,4 @@ import { UserExpiredEntity } from './models/user_expired.entity';
   providers: [UsersExpiredService],
   exports: [UsersExpiredService],
 })
-export class UsersExpiredModule {
-}
+export class UsersExpiredModule {}

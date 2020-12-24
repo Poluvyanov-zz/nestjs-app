@@ -1,8 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import {
-  BadRequestException,
-  UseGuards,
-} from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginInput } from './dto/login.input';
 import { CurrentUser } from '../../common/decorators/current.user.decorator';
@@ -20,8 +17,7 @@ export class AuthResolver {
   constructor(
     private readonly authService: AuthService,
     private readonly tokenService: TokenService,
-  ) {
-  }
+  ) {}
 
   @Mutation(() => LoginOutput)
   async login(@Args() loginInput: LoginInput): Promise<LoginOutput> {

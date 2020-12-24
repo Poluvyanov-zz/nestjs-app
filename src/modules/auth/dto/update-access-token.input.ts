@@ -1,11 +1,10 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { IsEmail } from 'class-validator';
+import { ArgsType, Field } from '@nestjs/graphql';
 
 @ArgsType()
 export class UpdateAccessTokenInput {
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   refresh_token: string;
 
-  @Field((type) => String, { nullable: false })
+  @Field(() => String, { nullable: false })
   old_access_token: string;
 }

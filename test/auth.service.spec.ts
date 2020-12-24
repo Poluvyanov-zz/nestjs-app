@@ -48,13 +48,13 @@ const mockedJwtService = {
 
 const mockedUsersService = {
   findByEmail: (email) => (email === 'test@test.com' ? user : null),
-  create: (user) => createdUser,
+  create: () => createdUser,
 };
 
 const mockedTokenService = {
-  createAccessToken: (payload) => createAccessTokenResponse,
-  createRefreshToken: (tokenContent) => refreshTokenResponse,
-  deleteRefreshToken: (user, value) => true,
+  createAccessToken: () => createAccessTokenResponse,
+  createRefreshToken: () => refreshTokenResponse,
+  deleteRefreshToken: () => true,
 };
 
 describe('AuthService', () => {

@@ -1,9 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  Logger,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { TokenService } from './token/token.service';
 import { UsersService } from '../users/users.service';
@@ -17,8 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly tokenService: TokenService,
     private readonly userService: UsersService,
-  ) {
-  }
+  ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
     try {
@@ -69,5 +63,4 @@ export class AuthService {
     }
     return 'ok';
   }
-
 }
