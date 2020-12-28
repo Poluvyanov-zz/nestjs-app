@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { NODE_ENV, SERVER_PORT } from './app.constants';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet/dist';
-import { join } from 'path';
+
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
@@ -14,10 +14,6 @@ async function bootstrap() {
       contentSecurityPolicy: NODE_ENV === 'production' ? undefined : false,
     }),
   );
-  app.setBaseViewsDir(join(__dirname, '..', 'resources/email_templates'));
-  app.setViewEngine('hbs');
-
   await app.listen(SERVER_PORT);
 }
-
 bootstrap();
