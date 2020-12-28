@@ -7,4 +7,7 @@ export class CreateUserArgs {
 
   @IsNotEmpty()
   readonly password: string;
+
+  @IsNotEmpty()
+  email_token?: string;
 }

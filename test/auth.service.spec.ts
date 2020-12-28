@@ -20,6 +20,8 @@ const user = {
 const createdUser = {
   id: 2,
   email: 'test2@test.com',
+  email_token: 'token',
+  email_verified: false,
   created_at: moment('2020-01-01 00:00:00').toDate(),
 };
 
@@ -49,6 +51,8 @@ const mockedJwtService = {
 const mockedUsersService = {
   findByEmail: (email) => (email === 'test@test.com' ? user : null),
   create: () => createdUser,
+  update: () => true,
+  findByEmailToken: () => createdUser,
 };
 
 const mockedTokenService = {
@@ -85,9 +89,12 @@ describe('AuthService', () => {
   });
   describe('registration', () => {
     it('should return user data', async () => {
+      authService.generateEmailToken = jest.fn().mockReturnValue('token');
       const result: RegistrationOutput = {
         id: 2,
         email: 'test2@test.com',
+        email_token: 'token',
+        email_verified: false,
         created_at: moment('2020-01-01 00:00:00').toDate(),
       };
 
@@ -119,6 +126,14 @@ describe('AuthService', () => {
       const result = 'ok';
 
       expect(await authService.logout(user, '123456')).toStrictEqual(result);
+    });
+  });
+
+  describe('verify user email', () => {
+    it('should return true', async () => {
+      const result = true;
+
+      expect(await authService.verifyEmail('token')).toStrictEqual(result);
     });
   });
 });

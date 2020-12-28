@@ -9,6 +9,7 @@ import RefreshTokenEntity from './models/refresh-token.entity';
 import { AuthResolver } from './auth.resolver';
 import { UsersModule } from '../users/users.module';
 import { UsersExpiredModule } from '../users_expired/users-expired.module';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UsersExpiredModule } from '../users_expired/users-expired.module';
     }),
     TypeOrmModule.forFeature([RefreshTokenEntity]),
   ],
+  controllers: [AuthController],
   providers: [AuthResolver, AuthService, JwtStrategy, TokenService],
 })
 export class AuthModule {}

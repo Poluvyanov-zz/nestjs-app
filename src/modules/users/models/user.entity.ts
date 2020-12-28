@@ -14,6 +14,14 @@ export class UserEntity {
   email: string;
 
   @Field(() => String)
+  @Column({ nullable: false, unique: false })
+  email_token: string;
+
+  @Field(() => Boolean)
+  @Column()
+  email_verified: boolean;
+
+  @Field(() => String)
   @Column()
   password: string;
 

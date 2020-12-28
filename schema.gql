@@ -5,6 +5,8 @@
 type UserEntity {
   id: Int!
   email: String!
+  email_token: String!
+  email_verified: Boolean!
   password: String!
   created_at: DateTime!
   updated_at: DateTime!
@@ -25,6 +27,8 @@ type LoginOutput {
 type RegistrationOutput {
   id: Int!
   email: String!
+  email_token: String!
+  email_verified: String!
   created_at: DateTime!
 }
 
@@ -36,6 +40,7 @@ type UpdateAccessTokenOutput {
 
 type Query {
   updateAccessToken(refresh_token: String!, old_access_token: String!): UpdateAccessTokenOutput!
+  verifyEmail(token: String!): Boolean!
 }
 
 type Mutation {

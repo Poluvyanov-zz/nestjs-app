@@ -11,8 +11,8 @@ export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly tokenService: TokenService,
-    private readonly userService: UsersService,
-  ) {}
+    private readonly userService: UsersService) {
+  }
 
   async validateUser(email: string, password: string): Promise<any> {
     try {
@@ -52,7 +52,9 @@ export class AuthService {
     if (await this.userService.findByEmail(email)) {
       throw new Error('User already exist');
     }
-    return this.userService.create(registrationInput);
+    const email_token = this.generateEmailToken();
+
+    return this.userService.create(registrationInput, email_token);
   }
 
   async logout(user: UserDto, refreshToken: string): Promise<string> {
@@ -62,5 +64,20 @@ export class AuthService {
       throw new Error(e.message);
     }
     return 'ok';
+  }
+
+  async verifyEmail(token: string) {
+    const user = await this.userService.findByEmailToken(token);
+    if (user && !user.email_verified) {
+      await this.userService.update(user.id, {
+        email_verified: true,
+      });
+      return true;
+    }
+    return false;
+  }
+
+  generateEmailToken() {
+    return (Math.floor(Math.random() * 9000000) + 1000000).toString();
   }
 }

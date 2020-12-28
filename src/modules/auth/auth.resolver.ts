@@ -11,6 +11,7 @@ import { UpdateAccessTokenInput } from './dto/update-access-token.input';
 import { TokenService } from './token/token.service';
 import { UpdateAccessTokenOutput } from './dto/update-access-token.output';
 import { LogoutInput } from './dto/logout.input';
+import { VerifyEmailInput } from './dto/verify.email.input';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -46,6 +47,11 @@ export class AuthResolver {
       throw new Error(error.message);
     }
     return response;
+  }
+
+  @Query(() => Boolean)
+  public async verifyEmail(@Args() verifyEmailInput: VerifyEmailInput) {
+    return this.authService.verifyEmail(verifyEmailInput.token);
   }
 
   @Mutation(() => String)

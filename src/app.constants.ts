@@ -24,3 +24,7 @@ export const JWT_ACCESS_TOKEN_TTL: any =
 export const JWT_REFRESH_TOKEN_TTL: any =
   parseInt(process.env.ACCESS_TOKEN_TTL, 10) || 30;
 export const SALT: any = process.env.SALT || '';
+export const MAILGUN_API_KEY: any = process.env.MAILGUN_API_KEY || '';
+export const MAILGUN_DOMAIN: any = process.env.MAILGUN_DOMAIN || '';
+export const CLIENT_EMAIL: any = process.env.CLIENT_EMAIL || '';
+export const APP_DOMAIN: any = process.env.APP_DOMAIN || '';
