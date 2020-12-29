@@ -1,8 +1,14 @@
-###NESTJS example project
-##Using graphql
+### NESTJS example project
 
-##Functionality in the API
+##### Using graphql
+##### Typeorm
+##### Email confirmation (mailgun with templates)
+##### Unit testing Jest
+
+
+## Functionality in the API
 >- User registration <br>
+>- User confirmation email <br>
 >- User authorization <br>
 >- Logging out a user <br>
 >- Create a note <br>

@@ -40,6 +40,7 @@ export class TokenService {
       const token = await this.refreshTokenRepository.findOne({
         value: refreshToken,
       });
+      console.log('token!!!', token);
       const currentDate = new Date();
       if (!token) {
         throw new NotFoundException('Refresh token not found');
@@ -48,13 +49,14 @@ export class TokenService {
         throw new Error('Refresh token expired');
       }
       const oldPayload = await this.validateToken(oldAccessToken, true);
-
+console.log('oldPayload!!!', oldPayload);
       if (+token.user_id !== +oldPayload.sub) {
         throw new Error('Token pair error');
       }
       const payload = {
         sub: oldPayload.sub,
       };
+      console.log('payload!!!', payload);
       const accessToken = await this.createAccessToken(payload);
       await this.refreshTokenRepository.delete(token.id);
       accessToken.refreshToken = await this.createRefreshToken({
@@ -103,10 +105,13 @@ export class TokenService {
   ): Promise<JwtPayload> {
     ignoreExpiration = ignoreExpiration === true ? ignoreExpiration : false;
     try {
+      console.log('token444444', token);
+      console.log('JWT_SECRET!!', JWT_SECRET);
       return verify(token, JWT_SECRET, {
         ignoreExpiration,
       }) as JwtPayload;
     } catch (e) {
+      console.log('token!!!2222');
       throw new Error(e.message);
     }
   }

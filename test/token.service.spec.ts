@@ -4,6 +4,14 @@ import moment from 'moment';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import RefreshTokenEntity from '../src/modules/auth/models/refresh-token.entity';
 import { UsersExpiredService } from '../src/modules/users_expired/users-expired.service';
+import { verify } from 'jsonwebtoken';
+
+const oldPayload = {
+  sub: 1,
+  iat: 1608795807,
+  exp: 1608796107,
+  jti: 'b5788ef0-45bb-11eb-a97a-af24c0d08079',
+};
 
 const refreshToken = {
   id: 1,
@@ -44,6 +52,8 @@ describe('TokenService', () => {
   });
   describe('getAccessTokenFromRefreshToken', () => {
     it('should return accessToken', async () => {
+      const verifyMock = jest.fn().mockReturnValue(oldPayload);
+
       tokenService.generateRefreshToken = jest
         .fn()
         .mockReturnValue('refreshToken');
@@ -52,6 +62,8 @@ describe('TokenService', () => {
         accessToken: 'accessToken',
         expiresIn: 300,
       });
+
+      (verify as jest.Mock) = verifyMock;
 
       const result = {
         accessToken: 'accessToken',

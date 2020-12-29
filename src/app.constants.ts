@@ -18,7 +18,7 @@ export const DB_DATABASE: any = process.env.DB_DATABASE || '';
 export const DB_CONNECTION_WITH_NO_SSL: any =
   process.env.DB_CONNECTION_WITH_NO_SSL !== 'true';
 
-export const JWT_SECRET: any = process.env.JWT_SECRET || '';
+export const JWT_SECRET: any = process.env.JWT_SECRET || 'secret';
 export const JWT_ACCESS_TOKEN_TTL: any =
   parseInt(process.env.ACCESS_TOKEN_TTL, 10) || 60 * 5;
 export const JWT_REFRESH_TOKEN_TTL: any =
