@@ -11,7 +11,6 @@ export class EventsService extends EventEmitter2 {
 
   @OnEvent('user.registered', { async: true })
   handleUserCreatedEvent(payload) {
-    console.log('payload!!!!!!', payload);
     const data = {
       verificationLink: `${APP_DOMAIN}/graphql?query={verifyEmail(token:"${payload.email_token}")}`,
       email: payload.email,
