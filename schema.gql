@@ -2,12 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserEntity {
+type Note {
   id: Int!
-  email: String!
-  email_token: String!
-  email_verified: Boolean!
-  password: String!
+  user: User!
+  title: String!
+  description: String!
   created_at: DateTime!
   updated_at: DateTime!
   deleted_at: DateTime!
@@ -17,6 +16,17 @@ type UserEntity {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type User {
+  id: Int!
+  email: String!
+  email_token: String!
+  email_verified: Boolean!
+  password: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime!
+}
 
 type LoginOutput {
   accessToken: String!
@@ -38,13 +48,28 @@ type UpdateAccessTokenOutput {
   expiresIn: String!
 }
 
+input UserEntity {
+  id: Int!
+  email: String!
+  email_token: String!
+  email_verified: Boolean!
+  password: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime!
+}
+
 type Query {
   updateAccessToken(refresh_token: String!, old_access_token: String!): UpdateAccessTokenOutput!
   verifyEmail(token: String!): Boolean!
+  notesByUserId(user_id: Float!): [Note!]!
+  noteById(id: Float!): Note!
 }
 
 type Mutation {
   login(email: String!, password: String!): LoginOutput!
   registration(email: String!, password: String!): RegistrationOutput!
   logout(refresh_token: String!): String!
+  createNote(title: String!, description: String!): Note!
+  deleteNote(id: Int!): Note!
 }

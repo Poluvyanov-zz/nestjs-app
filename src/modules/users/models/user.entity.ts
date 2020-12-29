@@ -1,8 +1,16 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { compareSync, hashSync } from 'bcrypt';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { NotesEntity } from '../../notes/models/notes.entity';
 
-@ObjectType()
+@ObjectType('User')
+@InputType()
 @Entity('users')
 export class UserEntity {
   @Field(() => Int)
@@ -44,6 +52,9 @@ export class UserEntity {
   async hashPassword() {
     this.password = await hashSync(this.password, 10);
   }
+
+  @OneToMany(() => NotesEntity, (note) => note.user)
+  notes?: NotesEntity[];
 
   async comparePassword(attempt: string): Promise<boolean> {
     return compareSync(attempt, this.password);

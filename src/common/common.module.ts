@@ -1,4 +1,4 @@
-import { HttpModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { EmailService } from './services/email.service';
 import { EventsService } from './events/events.service';
 

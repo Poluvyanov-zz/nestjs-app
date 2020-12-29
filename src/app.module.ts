@@ -8,12 +8,14 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { CommonModule } from './common/common.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { NotesModule } from './modules/notes/notes.module';
 
 @Module({
   imports: [
     CommonModule,
     AuthModule,
     UsersModule,
+    NotesModule,
     TypeOrmModule.forRoot(connectionOptions),
     GraphQLModule.forRoot({
       debug: false,

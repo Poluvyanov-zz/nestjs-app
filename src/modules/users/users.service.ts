@@ -11,8 +11,7 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private eventEmitter: EventEmitter2,
-  ) {
-  }
+  ) {}
 
   public async findByEmail(userEmail: string): Promise<UserEntity | null> {
     return this.userRepository.findOne({ email: userEmail });
@@ -23,7 +22,6 @@ export class UsersService {
   ): Promise<UserEntity | null> {
     return this.userRepository.findOne({ email_token: emailToken });
   }
-
 
   public async findById(id: number): Promise<UserEntity | null> {
     return this.userRepository.findOneOrFail(id);
